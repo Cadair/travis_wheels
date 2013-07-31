@@ -7,7 +7,7 @@ cd wheelhouse
 
 ftp -inv $HOST << EOF
 
-user $USER $PASS
+user $FTP_USER $FTP_PASS
 
 put *whl
 EOF

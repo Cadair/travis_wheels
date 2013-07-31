@@ -1,41 +1,33 @@
 language: python
-
 python:
-  - 2.7
-
+- 2.7
 virtualenv:
-     system_site_packages: false
-
-#There are a few environments configured, we specify a minumum version of mpl
-#and a exact version of Numpy to test against.
+  system_site_packages: false
 env:
-    - NUMPY_VERSION=1.7.1 MATPLOTLIB_VERSION=1.2 PANDAS_VERSION=0.11.0 SUDS_PKG='suds-jurko'
-
+  matrix:
+  - NUMPY_VERSION=1.7.1 MATPLOTLIB_VERSION=1.2 PANDAS_VERSION=0.11.0 SUDS_PKG='suds-jurko'
+  global:
+  - secure: ZF8C1Q4soXE3M3GtA8Wh2ptWMi/1alu2ocIFvhYQencPpSjKgDYG2ppwomSigwLuhTRuGh6FtUBaqVg+KR8llxMh7wMhS9oOfmKZ3SG0IgNGRKj1mFDEJqZwqGZZasfmm1OBc6iBt6tCSFk5l/TIUDF6Pw9acvLJHUdACcm2tzA=
+  - secure: mjxGsDeQZTtjLM1eRQN8T5FfILTU4IeKGsRi1OVcgms55X8AgmU6e2Z+rha2eQY46ftNjp+EwMThN7iW5BeEfXK89ihWLf2hdEVJePyBjxHQI2NGHtWc1h4EbaebPi8wNcQzTGWJy5mVImIEXv2+y+7lRnboCvquldiiUcnF88g=
 matrix:
-    include:
-      - python: 2.6
-        env: NUMPY_VERSION=1.7.1 MATPLOTLIB_VERSION=1.2 PANDAS_VERSION=0.11.0 SUDS_PKG='suds'
-      - python: 2.7
-        env: NUMPY_VERSION=1.6.2 MATPLOTLIB_VERSION=1.2 PANDAS_VERSION=0.11.0 SUDS_PKG='suds-jurko'
-      - python: 2.6
-        env: NUMPY_VERSION=1.6.2 MATPLOTLIB_VERSION=1.2 PANDAS_VERSION=0.11.0 SUDS_PKG='suds'
-      - python: 2.7
-        env: NUMPY_VERSION=1.7.1 MATPLOTLIB_VERSION=1.2 PANDAS_VERSION=0.10.1 SUDS_PKG='suds-jurko'
-      - python: 2.6
-        env: NUMPY_VERSION=1.7.1 MATPLOTLIB_VERSION=1.2 PANDAS_VERSION=0.10.1 SUDS_PKG='suds'
-
+  include:
+  - python: 2.6
+    env: NUMPY_VERSION=1.7.1 MATPLOTLIB_VERSION=1.2 PANDAS_VERSION=0.11.0 SUDS_PKG='suds'
+  - python: 2.7
+    env: NUMPY_VERSION=1.6.2 MATPLOTLIB_VERSION=1.2 PANDAS_VERSION=0.11.0 SUDS_PKG='suds-jurko'
+  - python: 2.6
+    env: NUMPY_VERSION=1.6.2 MATPLOTLIB_VERSION=1.2 PANDAS_VERSION=0.11.0 SUDS_PKG='suds'
+  - python: 2.7
+    env: NUMPY_VERSION=1.7.1 MATPLOTLIB_VERSION=1.2 PANDAS_VERSION=0.10.1 SUDS_PKG='suds-jurko'
+  - python: 2.6
+    env: NUMPY_VERSION=1.7.1 MATPLOTLIB_VERSION=1.2 PANDAS_VERSION=0.10.1 SUDS_PKG='suds'
 before_install:
-   # We do this to make sure we get the dependencies so pip works below
-   - sudo apt-get update -qq
-   - pip install pip --upgrade
-
+- sudo apt-get update -qq
+- pip install pip --upgrade
 install:
-   - pip install setuptools>=0.8 --upgrade
-   - pip install wheel --upgrade
-
-# command to run tests
+- pip install setuptools>=0.8 --upgrade
+- pip install wheel --upgrade
 script:
-  - pwd;
-  - bash make_wheels.sh
-  #Pipe to /dev/null to hide decrypted user / pass
-  - bash ftp_upload.sh > /dev/null
+- pwd;
+- bash make_wheels.sh
+- bash ftp_upload.sh > /dev/null
