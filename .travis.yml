@@ -35,5 +35,7 @@ install:
 
 # command to run tests
 script:
+  - pwd;
   - bash make_wheels.sh
-  - bash ftpupload.sh
+  #Pipe to /dev/null to hide decrypted user / pass
+  - bash ftp_upload.sh > /dev/null
