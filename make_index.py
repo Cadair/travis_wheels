@@ -18,7 +18,7 @@ for file in files:
 
 print wheels
 
-outf = open("index.html",'w')
+outf = open("wheelhouse/index.html",'w')
 
 header = [
 '<html>\n',
