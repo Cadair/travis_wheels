@@ -5,11 +5,20 @@ Created on Wed Jul 31 18:29:35 2013
 @author: stuart
 """
 import os
-import glob
+from ftplib import FTP
 
-wheels = glob.glob("./wheelhouse/*whl")
+ftp = FTP('ftp.servage.net')
+ftp.login(user=os.environ['FTP_USER'], passwd=os.environ['FTP_PASS'])
+files = ftp.nlst()
 
-outf = open("./wheelhouse/index.html",'w')
+wheels = []
+for file in files:
+    if os.path.splitext(file)[1] == '.whl':
+        wheels.append(file)
+
+print wheels
+
+outf = open("index.html",'w')
 
 header = [
 '<html>\n',
