@@ -24,6 +24,7 @@ matrix:
 before_install:
   - sudo apt-get update -qq
   - sudo apt-get install ftp
+  - sudo apt-get install -qq libatlas-dev liblapack-dev gfortran
   - pip install pip --upgrade
 install:
   - pip install setuptools>=0.8 --upgrade
