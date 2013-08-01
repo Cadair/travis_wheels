@@ -10,4 +10,5 @@ ftp -inv $HOST << EOF
 user $FTP_USER $FTP_PASS
 
 put *whl
+put index.html
 EOF
