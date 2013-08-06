@@ -43,8 +43,12 @@ install:
 script:
   - pwd;
   - pip wheel --wheel-dir=./wheelhouse matplotlib>=$MATPLOTLIB_VERSION
+  - pip wheel --wheel-dir=./wheelhouse pytz==2013b
+  - pip wheel --wheel-dir=./wheelhouse python-dateutil
   - pip wheel --wheel-dir=./wheelhouse --no-deps pandas==$PANDAS_VERSION
   - pip wheel --wheel-dir=./wheelhouse astropy
+  - pip wheel --wheel-dir=./wheelhouse h5py
+  - pip wheel --wheel-dir=./wheelhouse sphinx
   - ls wheelhouse;
   - python make_index.py
   - bash ftp_upload.sh > /dev/null
