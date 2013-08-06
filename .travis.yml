@@ -43,7 +43,7 @@ install:
 script:
   - pwd;
   - pip wheel --wheel-dir=./wheelhouse matplotlib>=$MATPLOTLIB_VERSION
-  - pip wheel --wheel-dir=./wheelhouse pandas==$PANDAS_VERSION
+  - pip wheel --wheel-dir=./wheelhouse --no-deps pandas==$PANDAS_VERSION
   - pip wheel --wheel-dir=./wheelhouse astropy
   - ls wheelhouse;
   - python make_index.py
