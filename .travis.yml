@@ -47,6 +47,9 @@ script:
   - pip wheel --wheel-dir=./wheelhouse python-dateutil
   - pip wheel --wheel-dir=./wheelhouse --no-deps pandas==$PANDAS_VERSION
   - pip wheel --wheel-dir=./wheelhouse astropy
+  - pip wheel --wheel-dir=./wheelhouse $SUDS_PKG
+  - pip wheel --wheel-dir=./wheelhouse beautifulsoup4
+  - pip wheel --wheel-dir=./wheelhouse pytest
   - pip wheel --wheel-dir=./wheelhouse h5py
   - pip wheel --wheel-dir=./wheelhouse sphinx
   - ls wheelhouse;
