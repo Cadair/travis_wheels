@@ -1,46 +1,43 @@
 language: python
 python:
-  - 2.6
-  - 2.7
+- 2.6
+- 2.7
+- 3.2 
+- 3.3
 virtualenv:
   system_site_packages: false
 env:
   global:
-    - NUMPY_VERSION_1=1.7.1  NUMPY_VERSION_2=1.6.2  MATPLOTLIB_VERSION=1.3.0  PANDAS_VERSION_1=0.12.0  PANDAS_VERSION_2=0.11.0  SUDS_PKG='suds'
-    - secure: ZF8C1Q4soXE3M3GtA8Wh2ptWMi/1alu2ocIFvhYQencPpSjKgDYG2ppwomSigwLuhTRuGh6FtUBaqVg+KR8llxMh7wMhS9oOfmKZ3SG0IgNGRKj1mFDEJqZwqGZZasfmm1OBc6iBt6tCSFk5l/TIUDF6Pw9acvLJHUdACcm2tzA=
-    - secure: mjxGsDeQZTtjLM1eRQN8T5FfILTU4IeKGsRi1OVcgms55X8AgmU6e2Z+rha2eQY46ftNjp+EwMThN7iW5BeEfXK89ihWLf2hdEVJePyBjxHQI2NGHtWc1h4EbaebPi8wNcQzTGWJy5mVImIEXv2+y+7lRnboCvquldiiUcnF88g=
-
+  - NUMPY_VERSION_1=1.7.1  NUMPY_VERSION_2=1.6.2  MATPLOTLIB_VERSION=1.3.0  PANDAS_VERSION_1=0.12.0  PANDAS_VERSION_2=0.11.0  SUDS_PKG='suds'
+  - secure: ahQCKkoEYo/8cW0hSRd2tDjdsdfUsZk0prmru4vEanyhL6kRP5+mXHAhqa0mN2E0ghD2gbgBvMg3RM3redXlSusls2ZuRMyNKL3KmjCqIzxiUOHaJCkgYC3hKl7V72GArb8SN/tqghYQ1XlC8DQrqvwwjQW9++MVu9v/biKmM6M=
+  - secure: qRkV0Xe1grLf7RqPjpNppd8ounH4w829z/7zomfeKkIllMIcX5drDVEbuv7PX4+Rspgk581HOLSW4zoaXeAQZzgYAuyLAVuGmYliDBeFcBPC/jEiNJP50o0bavo3/8m8eV4Y2gb+BTJ1yNR6f82egcXAYWL2cARyrlp1mJ4ygp4=
 before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install ftp
-  - sudo apt-get install -qq libatlas-dev liblapack-dev gfortran libhdf5-serial-1.8.4 libhdf5-serial-dev
-  - pip install pip --upgrade
-
+- sudo apt-get update -qq
+- sudo apt-get install ftp
+- sudo apt-get install -qq libatlas-dev liblapack-dev gfortran libhdf5-serial-1.8.4
+  libhdf5-serial-dev
+- pip install pip --upgrade
 install:
-  - pip install setuptools>=0.8 --upgrade
-  - pip install wheel --upgrade
-    # Install NumPy because Astropy needs it to build
-  - pip wheel --wheel-dir=./wheelhouse numpy==$NUMPY_VERSION_1
-  - pip install --use-wheel --no-index --find-links=./wheelhouse numpy==$NUMPY_VERSION_1
-    # Also install the latest version of cython
-  - pip wheel --wheel-dir=./wheelhouse cython
-  - pip install --use-wheel --no-index --find-links=./wheelhouse cython
-    # Do scipy here because it takes ages!!
-  - pip wheel --wheel-dir=./wheelhouse scipy
-
+- pip install setuptools>=0.8 --upgrade
+- pip install wheel --upgrade
+- pip wheel --wheel-dir=./wheelhouse numpy==$NUMPY_VERSION_1
+- pip install --use-wheel --no-index --find-links=./wheelhouse numpy==$NUMPY_VERSION_1
+- pip wheel --wheel-dir=./wheelhouse cython
+- pip install --use-wheel --no-index --find-links=./wheelhouse cython
+- pip wheel --wheel-dir=./wheelhouse scipy
 script:
-  - pip wheel --wheel-dir=./wheelhouse numpy==$NUMPY_VERSION_2
-  - pip wheel --wheel-dir=./wheelhouse matplotlib>=$MATPLOTLIB_VERSION
-  - pip wheel --wheel-dir=./wheelhouse pytz==2013b
-  - pip wheel --wheel-dir=./wheelhouse python-dateutil
-  - pip wheel --wheel-dir=./wheelhouse --no-deps pandas==$PANDAS_VERSION_1
-  - pip wheel --wheel-dir=./wheelhouse --no-deps pandas==$PANDAS_VERSION_2
-  - pip wheel --wheel-dir=./wheelhouse astropy
-  - pip wheel --wheel-dir=./wheelhouse $SUDS_PKG
-  - pip wheel --wheel-dir=./wheelhouse beautifulsoup4
-  - pip wheel --wheel-dir=./wheelhouse pytest
-  - pip wheel --wheel-dir=./wheelhouse h5py
-  - pip wheel --wheel-dir=./wheelhouse sphinx
-  - ls wheelhouse;
-  - python make_index.py
-  - bash ftp_upload.sh > /dev/null
+- pip wheel --wheel-dir=./wheelhouse numpy==$NUMPY_VERSION_2
+- pip wheel --wheel-dir=./wheelhouse matplotlib>=$MATPLOTLIB_VERSION
+- pip wheel --wheel-dir=./wheelhouse pytz==2013b
+- pip wheel --wheel-dir=./wheelhouse python-dateutil
+- pip wheel --wheel-dir=./wheelhouse --no-deps pandas==$PANDAS_VERSION_1
+- pip wheel --wheel-dir=./wheelhouse --no-deps pandas==$PANDAS_VERSION_2
+- pip wheel --wheel-dir=./wheelhouse astropy
+- pip wheel --wheel-dir=./wheelhouse $SUDS_PKG
+- pip wheel --wheel-dir=./wheelhouse beautifulsoup4
+- pip wheel --wheel-dir=./wheelhouse pytest
+- pip wheel --wheel-dir=./wheelhouse h5py
+- pip wheel --wheel-dir=./wheelhouse sphinx
+- ls wheelhouse;
+- python make_index.py
+- bash ftp_upload.sh > /dev/null
