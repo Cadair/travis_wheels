@@ -4,6 +4,7 @@ Created on Wed Jul 31 18:29:35 2013
 
 @author: stuart
 """
+from __future__ import print_function
 import os
 from ftplib import FTP
 
@@ -16,7 +17,7 @@ for file in files:
     if os.path.splitext(file)[1] == '.whl':
         wheels.append(file)
 
-print wheels
+print(wheels)
 
 outf = open("wheelhouse/index.html",'w')
 
