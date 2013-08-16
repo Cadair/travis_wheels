@@ -38,7 +38,8 @@ script:
 - pip wheel --wheel-dir=./wheelhouse python-dateutil
 - pip wheel --wheel-dir=./wheelhouse --no-deps pandas==$PANDAS_VERSION_1
 - pip wheel --wheel-dir=./wheelhouse --no-deps pandas==$PANDAS_VERSION_2
-- pip wheel --wheel-dir=./wheelhouse astropy
+#We really dont need to build numpy again!
+- pip wheel --wheel-dir=./wheelhouse --no-deps astropy
 - pip wheel --wheel-dir=./wheelhouse $SUDS_PKG
 - pip wheel --wheel-dir=./wheelhouse beautifulsoup4
 - pip wheel --wheel-dir=./wheelhouse pytest
