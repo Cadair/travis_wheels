@@ -11,7 +11,7 @@ env:
   - PANDAS_VERSION_1=0.12.0 
   - PANDAS_VERSION_2=0.11.0 
   - SUDS_PKG='suds'
-  global:
+global:
   - secure: ZF8C1Q4soXE3M3GtA8Wh2ptWMi/1alu2ocIFvhYQencPpSjKgDYG2ppwomSigwLuhTRuGh6FtUBaqVg+KR8llxMh7wMhS9oOfmKZ3SG0IgNGRKj1mFDEJqZwqGZZasfmm1OBc6iBt6tCSFk5l/TIUDF6Pw9acvLJHUdACcm2tzA=
   - secure: mjxGsDeQZTtjLM1eRQN8T5FfILTU4IeKGsRi1OVcgms55X8AgmU6e2Z+rha2eQY46ftNjp+EwMThN7iW5BeEfXK89ihWLf2hdEVJePyBjxHQI2NGHtWc1h4EbaebPi8wNcQzTGWJy5mVImIEXv2+y+7lRnboCvquldiiUcnF88g=
 
