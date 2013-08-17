@@ -33,6 +33,7 @@ install:
 - pip wheel --wheel-dir=./wheelhouse scipy
 script:
 - pip wheel --wheel-dir=./wheelhouse numpy==$NUMPY_VERSION_2
+- if [[ $TRAVIS_PYTHON_VERSION == '2.7' ]]; then pip wheel --wheel-dir=./wheelhouse numpy==1.5.1; fi
 - pip wheel --wheel-dir=./wheelhouse matplotlib==$MATPLOTLIB_VERSION
 - pip wheel --wheel-dir=./wheelhouse pytz==2013b
 - pip wheel --wheel-dir=./wheelhouse python-dateutil
