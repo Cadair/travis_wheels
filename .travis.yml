@@ -3,21 +3,18 @@ language: python
 python:
     - 2.6
     - 2.7
+    - 3.2
+    - 3.3
+
 env:
     global:
-        - NUMPY_VERSION_1=1.7.1  NUMPY_VERSION_2=1.6.2  MATPLOTLIB_VERSION=1.3.0  PANDAS_VERSION_1=0.12.0  PANDAS_VERSION_2=0.11.0  SUDS_PKG='suds'
+        - NUMPY_VERSION_1=1.7.1  NUMPY_VERSION_2=1.6.2  MATPLOTLIB_VERSION=1.3.0  PANDAS_VERSION_1=0.12.0  PANDAS_VERSION_2=0.11.0 SUDS_PKG='suds'
+        - if [[ $TRAVIS_PYTHON_VERSION == '3.2' -o $TRAVIS_PYTHON_VERSION == '3.3' ]]; then  SUDS_PKG='suds-jurko==0.4.1.jurko.4'; fi
         - secure: ahQCKkoEYo/8cW0hSRd2tDjdsdfUsZk0prmru4vEanyhL6kRP5+mXHAhqa0mN2E0ghD2gbgBvMg3RM3redXlSusls2ZuRMyNKL3KmjCqIzxiUOHaJCkgYC3hKl7V72GArb8SN/tqghYQ1XlC8DQrqvwwjQW9++MVu9v/biKmM6M=
         - secure: qRkV0Xe1grLf7RqPjpNppd8ounH4w829z/7zomfeKkIllMIcX5drDVEbuv7PX4+Rspgk581HOLSW4zoaXeAQZzgYAuyLAVuGmYliDBeFcBPC/jEiNJP50o0bavo3/8m8eV4Y2gb+BTJ1yNR6f82egcXAYWL2cARyrlp1mJ4ygp4=
     matrix:
         - CORE=1 EXTRA=0
         - CORE=0 EXTRA=1
-
-matrix:
-    include:
-        - python: 3.2
-          env: SUDS_PKG='suds-jurko==0.4.1.jurko.4'
-        - python: 3.3
-          env: SUDS_PKG='suds-jurko==0.4.1.jurko.4'
 
 virtualenv:
     system_site_packages: false
