@@ -10,6 +10,8 @@ env:
         - NUMPY_VERSION_1=1.7.1  NUMPY_VERSION_2=1.6.2  MATPLOTLIB_VERSION=1.3.0  PANDAS_VERSION_1=0.12.0  PANDAS_VERSION_2=0.11.0  SUDS_PKG='suds'
         - secure: ahQCKkoEYo/8cW0hSRd2tDjdsdfUsZk0prmru4vEanyhL6kRP5+mXHAhqa0mN2E0ghD2gbgBvMg3RM3redXlSusls2ZuRMyNKL3KmjCqIzxiUOHaJCkgYC3hKl7V72GArb8SN/tqghYQ1XlC8DQrqvwwjQW9++MVu9v/biKmM6M=
         - secure: qRkV0Xe1grLf7RqPjpNppd8ounH4w829z/7zomfeKkIllMIcX5drDVEbuv7PX4+Rspgk581HOLSW4zoaXeAQZzgYAuyLAVuGmYliDBeFcBPC/jEiNJP50o0bavo3/8m8eV4Y2gb+BTJ1yNR6f82egcXAYWL2cARyrlp1mJ4ygp4=
+    - CORE=1 EXTRA=0
+    - CORE=0 EXTRA=1
 
 matrix:
     include:
@@ -28,6 +30,7 @@ before_install:
     # Install more upto date openjpeg binaries.
     - wget http://openjpeg.googlecode.com/files/openjpeg-1.5.0-Linux-x86_64.tar.gz
     - sudo tar -xvf openjpeg-1.5.0-Linux-x86_64.tar.gz --strip-components=1 -C /
+    # Make numpy 1.8.0rc1
     - wget https://github.com/numpy/numpy/archive/v1.8.0rc1.tar.gz
     - tar -xvf v1.8.0rc1.tar.gz
     - pip wheel --wheel-dir=./wheelhouse ./numpy-1.8.0rc1/
@@ -41,24 +44,11 @@ install:
     - pip install --use-wheel --no-index --find-links=./wheelhouse cython
 
 script:
-    - pip wheel --wheel-dir=./wheelhouse numpy==$NUMPY_VERSION_2
     - if [[ $TRAVIS_PYTHON_VERSION == '2.7' ]]; then pip wheel --wheel-dir=./wheelhouse numpy==1.5.1; fi
-    - pip wheel --wheel-dir=./wheelhouse matplotlib==$MATPLOTLIB_VERSION
-    # Manually make pandas deps due to pip 1.4 / pytz versioning bug
-    - pip wheel --wheel-dir=./wheelhouse pytz==2013b
-    - pip wheel --wheel-dir=./wheelhouse python-dateutil
-    - pip wheel --wheel-dir=./wheelhouse --no-deps pandas==$PANDAS_VERSION_1
-    - pip wheel --wheel-dir=./wheelhouse --no-deps pandas==$PANDAS_VERSION_2
-    #We really dont need to build numpy so disable astropy deps.
-    - pip wheel --wheel-dir=./wheelhouse --no-deps astropy
-    - pip wheel --wheel-dir=./wheelhouse $SUDS_PKG
-    - pip wheel --wheel-dir=./wheelhouse beautifulsoup4
-    - pip wheel --wheel-dir=./wheelhouse pytest pytest-xdist
-    - pip wheel --wheel-dir=./wheelhouse h5py
-    - pip wheel --wheel-dir=./wheelhouse sphinx
-    - pip wheel --wheel-dir=./wheelhouse glymur
+    - if [[ $CORE == 1 ]]; then bash ./make_core_wheels.sh; fi
+    - if [[ $EXTRA == 1 ]]; then bash ./make_extra_wheels.sh; fi 
     # Do scipy last because it prints out half a forest at compile time.
-    - pip wheel --wheel-dir=./wheelhouse scipy
+    - if [[ $CORE == 1 ]]; then pip wheel --wheel-dir=./wheelhouse scipy; fi
     # Upload the results to the wheelhouse.
     - ls wheelhouse;
     - python make_index.py
