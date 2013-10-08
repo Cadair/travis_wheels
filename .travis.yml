@@ -19,7 +19,8 @@ virtualenv:
     system_site_packages: false
 
 before_install:
-    - if [ $TRAVIS_PYTHON_VERSION == '3.2' ] | [ $TRAVIS_PYTHON_VERSION == '3.3' ]; then  export SUDS_PKG='suds-jurko==0.4.1.jurko.4'; fi 
+    - if [ $TRAVIS_PYTHON_VERSION == '3.2' ] || [ $TRAVIS_PYTHON_VERSION == '3.3' ]; then  export SUDS_PKG='suds-jurko==0.4.1.jurko.4'; fi 
+    - echo $SUDS_PKG;
     - sudo apt-get update -qq
     - sudo apt-get install ftp
     - sudo apt-get install -qq libatlas-dev liblapack-dev gfortran libhdf5-serial-1.8.4 libhdf5-serial-dev
