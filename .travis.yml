@@ -44,7 +44,7 @@ script:
     - if [[ $CORE == 1 ]]; then bash ./make_core_wheels.sh; fi
     - if [[ $EXTRA == 1 ]]; then bash ./make_extra_wheels.sh; fi 
     # Do scipy last because it prints out half a forest at compile time.
-    - if [[ $CORE == 1 ]]; then pip wheel --wheel-dir=./wheelhouse scipy; fi
+    - if [[ $CORE == 1 ]]; then pip wheel -v --wheel-dir=./wheelhouse scipy; fi
     # Upload the results to the wheelhouse.
     - ls wheelhouse;
     - python make_index.py
