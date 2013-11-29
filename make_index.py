@@ -16,7 +16,7 @@ wheels = []
 for file in files:
     if os.path.splitext(file)[1] == '.whl':
         wheels.append(file)
-
+wheels.sort()
 print(wheels)
 
 outf = open("wheelhouse/index.html",'w')
