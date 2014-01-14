@@ -11,5 +11,6 @@ pip wheel --wheel-dir=./wheelhouse contextlib2 || EXIT_STATUS=$?
 pip wheel --wheel-dir=./wheelhouse mock || EXIT_STATUS=$?
 pip wheel --wheel-dir=./wheelhouse --no-deps glymur || EXIT_STATUS=$?
 pip wheel --wheel-dir=./wheelhouse sqlalchemy || EXIT_STATUS=$?
+pip wheel --wheel-dir=./wheelhouse python-coveralls || EXIT_STATUS=$?
 
 exit $EXIT_STATUS
