@@ -20,7 +20,7 @@ virtualenv:
     system_site_packages: false
 
 before_install:
-    - if [[ $TRAVIS_PYTHON_VERSION == '3.2' ] ||  $TRAVIS_PYTHON_VERSION == '3.3' ] || [ $TRAVIS_PYTHON_VERSION == '3.4' ]; then  export SUDS_PKG='suds-jurko'; fi 
+    - if [ $TRAVIS_PYTHON_VERSION == '3.2' ] ||  $TRAVIS_PYTHON_VERSION == '3.3' ] || [ $TRAVIS_PYTHON_VERSION == '3.4' ]; then  export SUDS_PKG='suds-jurko'; fi 
     - echo $SUDS_PKG;
     - sudo apt-get update -qq
     - sudo apt-get install ftp
