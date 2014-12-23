@@ -4,7 +4,7 @@ python:
     - 2.7
 env:
     global:
-        - NUMPY_VERSION_1=1.9.1  NUMPY_VERSION_2=1.8.1  PANDAS_VERSION_1=0.15.2 
+        - NUMPY_VERSION_1=1.8.1  PANDAS_VERSION_1=0.14.1 
         - secure: ahQCKkoEYo/8cW0hSRd2tDjdsdfUsZk0prmru4vEanyhL6kRP5+mXHAhqa0mN2E0ghD2gbgBvMg3RM3redXlSusls2ZuRMyNKL3KmjCqIzxiUOHaJCkgYC3hKl7V72GArb8SN/tqghYQ1XlC8DQrqvwwjQW9++MVu9v/biKmM6M=
         - secure: qRkV0Xe1grLf7RqPjpNppd8ounH4w829z/7zomfeKkIllMIcX5drDVEbuv7PX4+Rspgk581HOLSW4zoaXeAQZzgYAuyLAVuGmYliDBeFcBPC/jEiNJP50o0bavo3/8m8eV4Y2gb+BTJ1yNR6f82egcXAYWL2cARyrlp1mJ4ygp4=
     matrix:
@@ -30,8 +30,8 @@ before_install:
 install:
 #Make wheels of the primary version of NumPy and Cython and install as they are
 #build dependacies.
-    - pip wheel --wheel-dir=./wheelhouse numpy==$NUMPY_VERSION_1
-    - pip install --use-wheel --no-index --find-links=./wheelhouse numpy==$NUMPY_VERSION_1
+    - pip wheel --wheel-dir=./wheelhouse numpy
+    - pip install --use-wheel --no-index --find-links=./wheelhouse numpy
     - pip wheel --wheel-dir=./wheelhouse cython
     - pip install --use-wheel --no-index --find-links=./wheelhouse cython
 
