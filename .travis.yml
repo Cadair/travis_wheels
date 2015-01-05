@@ -9,8 +9,9 @@ env:
         - secure: ahQCKkoEYo/8cW0hSRd2tDjdsdfUsZk0prmru4vEanyhL6kRP5+mXHAhqa0mN2E0ghD2gbgBvMg3RM3redXlSusls2ZuRMyNKL3KmjCqIzxiUOHaJCkgYC3hKl7V72GArb8SN/tqghYQ1XlC8DQrqvwwjQW9++MVu9v/biKmM6M=
         - secure: qRkV0Xe1grLf7RqPjpNppd8ounH4w829z/7zomfeKkIllMIcX5drDVEbuv7PX4+Rspgk581HOLSW4zoaXeAQZzgYAuyLAVuGmYliDBeFcBPC/jEiNJP50o0bavo3/8m8eV4Y2gb+BTJ1yNR6f82egcXAYWL2cARyrlp1mJ4ygp4=
     matrix:
-        - CORE=1 EXTRA=0
-        - CORE=0 EXTRA=1
+        - CORE=1 EXTRA=0 SCIPY=0
+        - CORE=0 EXTRA=1 SCIPY=0
+        - CORE=0 EXTRA=0 SCIPY=1
 
 virtualenv:
     system_site_packages: false
@@ -40,7 +41,7 @@ script:
     - if [[ $CORE == 1 ]]; then bash ./make_core_wheels.sh; fi
     - if [[ $EXTRA == 1 ]]; then bash ./make_extra_wheels.sh; fi 
     # Do scipy last because it prints out half a forest at compile time.
-    - if [[ $CORE == 1 ]]; then ./build_scipy.sh; fi
+    - if [[ $SCIPY == 1 ]]; then ./build_scipy.sh; fi
     # Upload the results to the wheelhouse.
     - ls wheelhouse;
     - python make_index.py
