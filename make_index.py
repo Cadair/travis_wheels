@@ -6,6 +6,7 @@ Created on Wed Jul 31 18:29:35 2013
 """
 from __future__ import print_function
 import os
+import glob
 from ftplib import FTP
 
 ftp = FTP('ftp.servage.net')
@@ -18,7 +19,7 @@ for file in files:
         wheels.append(file)
 for file in glob.glob("wheelhouse/*whl"):
     if os.path.splitext(file)[1] == '.whl':
-        wheels.append(file)
+        wheels.append(os.path.split(file)[1])
 
 wheels.sort()
 wheels = list(set(wheels))
